@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel/cubit/app_cubit_logic.dart';
+import 'package:travel/cubit/app_cubits.dart';
 import 'package:travel/pages/detail_page.dart';
 import 'package:travel/pages/main_pages.dart';
+import 'package:travel/services/data_service.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,7 +18,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const DetailPage(),
+      home: BlocProvider<AppCubites>(
+        create: (context) => AppCubites(
+          data: DataServices(),
+        ),
+        child: AppCubitesLogics(),
+      ),
     );
   }
 }
